@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import AppBar               from 'material-ui/AppBar';
 import ImageList            from './ImageList';
-import fetch                from 'isomorphic-fetch'
 import camera               from '../camera.svg';
+import fire                 from '../fire';
 
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      images: []
-    }
+    this.state = { images: [] }
   }
 
-  componentDidMount() {
-    fetch("https://nasa-udacity.firebaseio.com/Images.json")
-      .then(res => res.json())
-      .then(json => Object.values(json))
-      .then(images => this.setState({ images }))
+  componentWillMount() {
+    let imagesRef = fire.database().ref('Images');
+    imagesRef.on('child_added', image => {
+      this.setState(prev => ({
+        images: [image.val()].concat(prev.images),
+      }));
+    });
   }
 
   render() {

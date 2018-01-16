@@ -25,19 +25,22 @@ let firebase = request.createClient('https://nasa-udacity.firebaseio.com/');
 
 nasa.get('apod?api_key=DEMO_KEY', (err, res, body) => {
 
+  let copyright = body.copyright ? body.copyright : 'Public Domain';
+
   let data = {
     date: body.date,
     explanation: body.explanation,
     media_type: body.media_type,
     title: body.title,
-    url: body.url
+    url: body.url,
+    copyright: copyright
   };
 
   firebase.post('Images.json', data, (err, res, body) => {
     if (err) return console.log("Error posting new image");
-    console.log("Saved Image Data successfully on Firebase");
+    console.log("Saved Images successfully");
   });
 });
 ```
 
-As you can see, it does a `GET` request to NASA's API, parses the response and creates a `POST` request to our database effectively bypassing our problem. 
+As you can see, it does a `GET` request to NASA's API, parses the response and creates a `POST` request to our database effectively bypassing our problem.

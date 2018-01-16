@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import Image                from './Image'
 
 class ImageList extends Component {
+
+  sortByDate(){
+    return this.props.images.sort((first, second) => {
+      if (first.date < second.date) { return -1; }
+      if (first.date > second.date) { return 1; }
+      return 0;
+    });
+  }
+
   render() {
-    const { images } = this.props;
     return(
       <div className="image-list">
-        { images.reverse().map((image, i) =>
+        { this.sortByDate().reverse().map((image, i) =>
           <Image
             key={i}
             date={image.date}

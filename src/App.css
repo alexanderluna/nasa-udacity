@@ -1,14 +1,21 @@
-html {
-  font-family: 'Roboto', sans-serif;
-}
-
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 1000px) {
   .card-title {
     display: none;
   }
 
   .image-list {
     width: 60%;
+    margin: 2em auto;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 999px) {
+  .card-title {
+    display: none;
+  }
+
+  .image-list {
+    width: 80%;
     margin: 2em auto;
   }
 }
