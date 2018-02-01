@@ -4,7 +4,9 @@ import Youtube                  from 'react-youtube';
 
 class Media extends Component {
   getVideoID() {
-    return this.props.url.split("embed/")[1].split("?")[0]
+    if (this.props.url.match("embed/")) {
+      return this.props.url.split("embed/")[1].split("?")[0]
+    }
   }
 
   render() {
