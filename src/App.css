@@ -1,8 +1,4 @@
 @media screen and (min-width: 1000px) {
-  .card-title {
-    display: none;
-  }
-
   .image-list {
     width: 60%;
     margin: 2em auto;
@@ -10,10 +6,6 @@
 }
 
 @media (min-width: 700px) and (max-width: 999px) {
-  .card-title {
-    display: none;
-  }
-
   .image-list {
     width: 80%;
     margin: 2em auto;
@@ -21,10 +13,6 @@
 }
 
 @media screen and (max-width: 699px) {
-  .card-overlay-title {
-    display: none;
-  }
-
   .image-list {
     width: 100%;
   }
@@ -39,10 +27,28 @@ iframe {
   width: 100%;
 }
 
+a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+#root {
+	overflow: hidden;
+}
+
 .top-image {
   margin-top: 12px;
   margin-right: 15px;
   margin-left: 0px;
+}
+
+.card-title {
+	background-color: #000000d4;
+}
+
+.card-title span {
+	color: whitesmoke !important;
 }
 
 
@@ -52,4 +58,9 @@ iframe {
 
 .card {
   margin-bottom: 4em;
+}
+
+.pagination {
+	width: calc(50% - .5rem);
+	margin: 1rem .25rem;
 }
