@@ -8,9 +8,9 @@ import nasa  from '../nasa.png'
 
 class Image extends Component {
 
-  render() {
-		const { info, id } = this.props;
-    return(
+	render() {
+		const { info } = this.props;
+		return(
 			<Card className="card">
 				<CardHeader
 					title={ `Image Credit: ${info.copyright}` }
@@ -20,15 +20,14 @@ class Image extends Component {
 				<CardTitle className="card-title" title={ info.title } />
 				<CardText className="card-text">{ info.explanation }</CardText>
 				<RaisedButton
-					containerElement={<Link to={`/image/${id}`}/>}
+					containerElement={<Link to={`/image/${info.id}`}/>}
 					label="View Image"
 					secondary={true}
 					fullWidth={true}
 					/>
 			</Card>
-    )
-  }
+		)
+	}
 }
-
 
 export default Image;
