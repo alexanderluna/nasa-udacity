@@ -1,6 +1,6 @@
-import React, { Component }     from 'react';
-import { CardMedia, CardTitle } from 'material-ui/Card';
-import Youtube                  from 'react-youtube';
+import React, { Component } from 'react';
+import { CardMedia } from 'material-ui/Card';
+import Youtube from 'react-youtube';
 
 class Media extends Component {
   getVideoID() {
@@ -18,7 +18,7 @@ class Media extends Component {
           ? <CardMedia className="card-media">
               <Youtube videoId={ this.getVideoID() } />
             </CardMedia>
-          : <CardMedia className="card-media" overlay={<CardTitle className="card-overlay-title" title={ title } />} >
+          : <CardMedia className="card-media">
               <img src={ url } alt={ title } />
             </CardMedia>
         }
