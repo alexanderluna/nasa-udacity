@@ -5,20 +5,21 @@ import { Link } from 'react-router-dom';
 import fire from '../fire';
 
 class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { images: [], image_keys: [] }
-  }
+	constructor(props) {
+		super(props)
+		this.state = { images: [] }
+	}
 
   componentWillMount() {
     let imagesRef = fire.database().ref('Images');
     imagesRef.on('child_added', image => {
-      this.setState(prev => ({
-        images: [ image.val() ].concat(prev.images),
-				image_keys: [image.ref.key].concat(prev.image_keys)
-      }));
-    });
-  }
+			const data = image.val();
+			data.id = image.ref.key;
+			this.setState(prev => ({
+				images: [ data ].concat(prev.images),
+			}));
+		});
+	}
 
 	sortByDate(){
 		return this.state.images.sort((first, second) => {
@@ -31,7 +32,7 @@ class Home extends Component {
 	nextPage() {
 		const page = this.props.match.params.page;
 		if(page) return parseInt(page, 10) + 1;
-		return 1;
+		return 2;
 	}
 
 	previousPage() {
@@ -51,7 +52,7 @@ class Home extends Component {
     return(
 			<div className="image-list">
 				{ this.filterByParams().map((image, i) =>
-					<Image info={image} key={i} id={this.state.image_keys[i]} />
+					<Image info={image} key={i} />
 				)}
 				<RaisedButton
 					containerElement={<Link to={`/page/${this.previousPage()}`}/>}
