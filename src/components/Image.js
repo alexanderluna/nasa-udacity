@@ -18,13 +18,13 @@ class Image extends Component {
 					avatar={ <Avatar src={ nasa } alt="nasa icon"/>} />
 				<Media type={ info.media_type } url={ info.url } title={ info.title }/>
 				<CardTitle className="card-title" title={ info.title } />
-				<CardText className="card-text">{ info.explanation }</CardText>
 				<RaisedButton
 					containerElement={<Link to={`/image/${info.id}`}/>}
 					label="View Image"
 					secondary={true}
 					fullWidth={true}
-					/>
+				/>
+				<CardText className="card-text">{ info.explanation }</CardText>
 			</Card>
 		)
 	}
