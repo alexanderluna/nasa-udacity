@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player'
 
 class Media extends Component {
 
-  render() {
+	render() {
 		const { type, url, title } = this.props;
 		return(
 			<div>
