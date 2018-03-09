@@ -11,8 +11,8 @@ class Home extends Component {
 	}
 
   componentWillMount() {
-    let imagesRef = fire.database().ref('Images');
-    imagesRef.on('child_added', image => {
+		let imagesRef = fire.database().ref('Images');
+		imagesRef.on('child_added', image => {
 			const data = image.val();
 			data.id = image.ref.key;
 			this.setState(prev => ({
@@ -29,39 +29,41 @@ class Home extends Component {
 		});
 	}
 
-	nextPage() {
-		const page = this.props.match.params.page;
-		if(page) return parseInt(page, 10) + 1;
-		return 2;
+	nextPage(page) {
+		return  page ? parseInt(page, 10) + 1 : 2;
 	}
 
-	previousPage() {
-		const page = this.props.match.params.page;
-		if(page && page > 1) return parseInt(page, 10) - 1;
-		return 1;
+	previousPage(page) {
+		return (page && page > 1) ? parseInt(page, 10) - 1 : 1
 	}
 
-	filterByParams() {
-		const page = this.props.match.params.page;
-		const end = page ? page * 10 : 10;
-		const start = end > 10 ? end - 10 : 0;
-		return this.sortByDate().reverse().slice(start, end);
+	filterByParams(id, page) {
+		if(id) {
+			return this.state.images.filter(image => {
+				return (image.id === id) ? image : false
+			})
+		} else {
+			const end = page ? page * 10 : 10;
+			const start = end > 10 ? end - 10 : 0;
+			return this.sortByDate().reverse().slice(start, end);
+		}
 	}
 
   render() {
-    return(
+		const { id, page } = this.props.match.params
+		return(
 			<div className="image-list">
-				{ this.filterByParams().map((image, i) =>
+				{ this.filterByParams(id, page).map((image, i) =>
 					<Image info={image} key={i} />
 				)}
 				<RaisedButton
-					containerElement={<Link to={`/page/${this.previousPage()}`}/>}
+					containerElement={<Link to={`/page/${this.previousPage(page)}`}/>}
 					label="Previous Page"
 					primary={true}
 					className="pagination"
 					/>
 				<RaisedButton
-					containerElement={<Link to={`/page/${this.nextPage()}`}/>}
+					containerElement={<Link to={`/page/${this.nextPage(page)}`}/>}
 					label="Next Page"
 					primary={true}
 					className="pagination"
