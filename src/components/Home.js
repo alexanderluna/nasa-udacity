@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import Image from './Image';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Link } from 'react-router-dom';
+import Navigation from './Navigation';
 import fire from '../fire';
 
 class Home extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { images: [] }
+		this.state = { images: [], detail: true }
 	}
 
   componentWillMount() {
+		if(this.props.match.params.id) {
+			this.setState({detail: false});
+		}
 		let imagesRef = fire.database().ref('Images');
 		imagesRef.on('child_added', image => {
 			const data = image.val();
@@ -34,13 +36,13 @@ class Home extends Component {
 	}
 
 	previousPage(page) {
-		return (page && page > 1) ? parseInt(page, 10) - 1 : 1
+		return (page && page > 1) ? parseInt(page, 10) - 1 : 1;
 	}
 
 	filterByParams(id, page) {
 		if(id) {
 			return this.state.images.filter(image => {
-				return (image.id === id) ? image : false
+				return (image.id === id) ? image : false;
 			})
 		} else {
 			const end = page ? page * 10 : 10;
@@ -50,24 +52,16 @@ class Home extends Component {
 	}
 
   render() {
-		const { id, page } = this.props.match.params
+		const {id, page} = this.props.match.params;
 		return(
 			<div className="image-list">
-				{ this.filterByParams(id, page).map((image, i) =>
-					<Image info={image} key={i} />
+				{ this.filterByParams(id, page).map((img, i) =>
+					<Image info={img} key={i}/>
 				)}
-				<RaisedButton
-					containerElement={<Link to={`/page/${this.previousPage(page)}`}/>}
-					label="Previous Page"
-					primary={true}
-					className="pagination"
-					/>
-				<RaisedButton
-					containerElement={<Link to={`/page/${this.nextPage(page)}`}/>}
-					label="Next Page"
-					primary={true}
-					className="pagination"
-					/>
+				{ this.state.detail
+					? <Navigation prev={this.previousPage(page)} next={this.nextPage(page)}/>
+					: <div/>
+				}
 			</div>
 		)
 	}
