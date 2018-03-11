@@ -9,7 +9,7 @@ class Home extends Component {
 		this.state = { images: [], detail: true }
 	}
 
-  componentWillMount() {
+	componentWillMount() {
 		if(this.props.match.params.id) {
 			this.setState({detail: false});
 		}
@@ -51,7 +51,7 @@ class Home extends Component {
 		}
 	}
 
-  render() {
+	render() {
 		const {id, page} = this.props.match.params;
 		return(
 			<div className="image-list">
