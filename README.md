@@ -11,6 +11,19 @@ We decided to start a new project, in order to solidify our knowledge about Prog
 - Service Workers
 - crontab (cron job)
 
+## Installation instructions
+
+```bash
+git clone git@github.com:alexanderluna/nasa-udacity.git
+cd nasa-udacity
+
+yarn install
+yarn start
+```
+
+Please read the next section on crontab.
+
+
 ## Crontab
 
 The reason we have to use Crontab is because we are using Firebase and the Spark plan (free tier) only allows for Google API requests not third party ones. We are using NASA's API to get the `Image of Day` thus I created a small node app that gets once a day the `Image of the Day` and posts it via the Command line to our Firebase Database.
