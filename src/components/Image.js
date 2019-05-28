@@ -1,33 +1,48 @@
-import React, { Component } from 'react';
-import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import RaisedButton from 'material-ui/RaisedButton';
+import React from 'react';
+import {
+  Avatar, Button, Card, CardHeader, CardContent, Typography,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Media from './Media';
-import nasa  from '../nasa.png'
+import nasa from '../assets/nasa.png';
 
-class Image extends Component {
 
-	render() {
-		const { info } = this.props;
-		return(
-			<Card className="card">
-				<CardHeader
-					title={ `Image Credit: ${info.copyright}` }
-					subtitle={ info.date }
-					avatar={ <Avatar src={ nasa } alt="nasa icon"/>} />
-				<Media type={ info.media_type } url={ info.url } title={ info.title }/>
-				<CardTitle className="card-title" title={ info.title } />
-				<RaisedButton
-					containerElement={<Link to={`/image/${info.id}`}/>}
-					label="View Image"
-					secondary={true}
-					fullWidth={true}
-				/>
-				<CardText className="card-text">{ info.explanation }</CardText>
-			</Card>
-		)
-	}
-}
+const Image = ({ info }) => (
+  <Card className="card">
+    <CardHeader
+      title={`Image Credit: ${info.copyright}`}
+      subheader={info.date}
+      avatar={(
+        <Avatar
+          aria-label="nasa iod"
+          src={nasa}
+          alt="nasa icon"
+        />
+      )}
+    />
+    <Media
+      type={info.media_type}
+      url={info.url}
+      title={info.title}
+    />
+    <CardContent>
+      <Button
+        fullWidth
+        variant="contained"
+        color="secondary"
+      >
+        <Link to={`/image/${info.id}`}>View Image</Link>
+      </Button>
+      <Typography
+        className="card-text"
+        variant="body2"
+        color="textSecondary"
+        component="p"
+      >
+        {info.explanation}
+      </Typography>
+    </CardContent>
+  </Card>
+);
 
 export default Image;
