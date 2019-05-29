@@ -1,24 +1,19 @@
-import React, { Component } from 'react';
-import { CardMedia } from 'material-ui/Card';
-import ReactPlayer from 'react-player'
+import React from 'react';
+import { CardMedia } from '@material-ui/core';
 
-class Media extends Component {
+const Media = ({ type, url, title }) => (
+  <div>
+    {(type === 'video') && (
+      <CardMedia className="card-media">
+        <iframe title={title} src={url} controls />
+      </CardMedia>
+    )}
+    {(type !== 'video') && (
+      <CardMedia className="card-media">
+        <img src={url} alt={title} />
+      </CardMedia>
+    )}
+  </div>
+);
 
-	render() {
-		const { type, url, title } = this.props;
-		return(
-			<div>
-				{ (type === 'video')
-				? <CardMedia className="card-media">
-						<ReactPlayer url={url} controls={true}/>
-					</CardMedia>
-				: <CardMedia className="card-media">
-						<img src={ url } alt={ title } />
-					</CardMedia>
-				}
-			</div>
-		)
-	}
-}
-
-export default Media
+export default Media;
