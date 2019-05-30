@@ -1,25 +1,16 @@
-import React, {Component} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import React from 'react';
+import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-export default class Navigation extends Component {
-	render() {
-		const {prev, next} = this.props;
-		return(
-			<div>
-				<RaisedButton
-					containerElement={<Link to={`/page/${prev}`}/>}
-					label="Previous Page"
-					primary={true}
-					className="pagination"
-				/>
-				<RaisedButton
-					containerElement={<Link to={`/page/${next}`}/>}
-					label="Next Page"
-					primary={true}
-					className="pagination"
-				/>
-			</div>
-		)
-	}
-}
+const Navigation = ({ prev, next }) => (
+  <div>
+    <Button variant="contained" color="primary" className="pagination">
+      <Link to={`/page/${prev}`}>Previous Page</Link>
+    </Button>
+    <Button variant="contained" color="primary" className="pagination">
+      <Link to={`/page/${next}`}>Next Page</Link>
+    </Button>
+  </div>
+);
+
+export default Navigation;
