@@ -17,7 +17,7 @@ const App = () => (
   <ThemeProvider theme={theme}>
     <Router>
       <div>
-        <AppBar position="static" color="primary">
+        <AppBar color="primary">
           <Toolbar>
             <Typography variant="h5" color="inherit">
               <Link to="/">NASA:IOD</Link>
