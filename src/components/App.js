@@ -4,6 +4,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Home from './Home';
+import Detail from './Detail';
 import './App.css';
 
 const theme = createMuiTheme({
@@ -26,7 +27,7 @@ const App = () => (
         </AppBar>
         <Route exact path="/" component={Home} />
         <Route path="/page/:page" component={Home} />
-        <Route path="/image/:id" component={Home} />
+        <Route path="/image/:id" component={Detail} />
       </div>
     </Router>
   </ThemeProvider>
