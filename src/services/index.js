@@ -1,6 +1,6 @@
 import fire from '../fire';
 
-const getImageList = (page = 0) => (
+export const getImageList = (page = 0) => (
   fire
     .database()
     .ref('Images')
@@ -11,4 +11,11 @@ const getImageList = (page = 0) => (
     .then((images) => images.val())
 );
 
-export default getImageList;
+export const getImageById = (id) => (
+  fire
+    .database()
+    .ref('Images')
+    .child(id)
+    .once('value')
+    .then((image) => image.val())
+);
