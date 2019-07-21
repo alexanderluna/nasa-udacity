@@ -1,12 +1,10 @@
 import fire from '../fire';
 
-export const getImageList = (page = 0) => (
+export const getImageList = () => (
   fire
     .database()
     .ref('Images')
     .orderByChild('date')
-    .startAt(page)
-    .limitToLast(20)
     .once('value')
     .then((images) => images.val())
 );
