@@ -13,9 +13,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Home = ({
-  history, getImages, images, match: { params }
-}) => {
+const Home = ({ history, getImages, images, match: { params } }) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -55,8 +53,13 @@ const Home = ({
   );
 };
 
-const mapStateToProps = (state) => (
-  { images: Object.values(state.images) }
-);
+const mapStateToProps = (state, prevProps) => {
+  const { page = 0 } = prevProps.match.params;
+  const currentPage = (page * 20);
+  const limitTo = ((parseInt(page, 20) + 1) * 20);
+  return {
+    images: Object.values(state.images).reverse().slice(currentPage, limitTo),
+  };
+};
 
 export default connect(mapStateToProps, { getImages })(Home);
